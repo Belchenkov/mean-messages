@@ -1,3 +1,26 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-html, body { height: 100%; }
+html, body {
+    height: 100%;
+    font-size: 16px;
+    font-family: 'Abel', sans-serif!important;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.d-flex-r {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.d-flex-c {
+    display: flex;
+    flex-direction: column;
+}
+
+.mr-1 {
+    margin-right: 1rem;
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}

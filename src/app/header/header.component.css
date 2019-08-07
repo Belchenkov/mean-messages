@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Ma+Shan+Zheng&display=swap');
+
+.toolbar {
+    background: #3ba08a;
+}
+
+.logo {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 2.5rem;
+    color: #fcae40;
+    text-shadow: 0 0 3px #000;
+}
