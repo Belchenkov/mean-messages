@@ -4,6 +4,19 @@
             {{ post.title }}
         </mat-expansion-panel-header>
         <p>{{ post.content }}</p>
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+          >EDIT</button>
+          <button
+            mat-raised-button
+            color="warn"
+            class="ml-1"
+            type="button"
+          >DELETE</button>
+        </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
 
