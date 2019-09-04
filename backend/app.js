@@ -1,7 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose.connect('mongodb://belchenkov:12qwasZX@ds217078.mlab.com:17078/mean_messages',
+  { useNewUrlParser: true }
+)
+  .then(() => {
+    console.log('Connected to database!');
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 const Post = require('./models/post');
 
