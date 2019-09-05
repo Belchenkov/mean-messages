@@ -58,6 +58,8 @@ app.post('/api/posts', (req, res, next) => {
     content: req.body.content
   });
 
+  post.save();
+
   res.status(201).json({
     message: 'Success'
   });
