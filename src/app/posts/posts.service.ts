@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operator';
 
 import { Post } from './post.model';
+import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -13,7 +13,7 @@ export class PostsService {
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts')
+    this.http.get<{message: string, posts}>('http://localhost:3000/api/posts')
       .pipe(map(postData => {
         return postData.posts.map(post => {
           return {
@@ -45,7 +45,8 @@ export class PostsService {
   deletePost(postId: string) {
     this.http.delete('http://localhost:3000/api/posts/' + postId)
       .subscribe(() => {
-        console.log('Deleted');
+        const updatedPosts = this.posts.filter(post => post.id !== postId);
+        this.postsUpdated.next([...this.posts]);
       });
   }
 }
