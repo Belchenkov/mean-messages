@@ -1,7 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose.connect('mongodb://belchenkov:12qwasZX@ds217078.mlab.com:17078/mean_messages',
+  { useNewUrlParser: true }
+)
+  .then(() => {
+    console.log('Connected to database!');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+const Post = require('./models/post');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,32 +33,38 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/posts', (req, res, next) => {
-  const posts = [
-    {
-      id: 'sdfsdf343434dfdf',
-      title: 'First Post',
-      content: 'This is coming from server'
-    },
-    {
-      id: 'ererdf343434dfdf',
-      title: 'Second Post',
-      content: 'This is coming from server!'
-    }
-  ];
-
-  return res.status(200).json({
-    message: 'Success',
-    posts
-  });
+  Post.find()
+    .then(docs => {
+      return res.status(200).json({
+        message: 'Posts fetched successfully',
+        posts: docs
+      });
+    });
 });
 
 app.post('/api/posts', (req, res, next) => {
-  const { title, content } = req.body;
-  console.log(req.body);
-
-  res.status(201).json({
-    message: 'Success'
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
   });
+
+  post.save()
+    .then(createdPost => {
+      res.status(201).json({
+        message: 'Post added successfully',
+        postId: createdPost.id
+      });
+    });
+});
+
+app.delete('/api/posts/:id', (req, res, next) => {
+  Post.deleteOne({_id: req.params.id})
+    .then(result => {
+      console.log(result);
+      res.status(200).json({
+        message: 'Post deleted!'
+      });
+    });
 });
 
 module.exports = app;
