@@ -48,11 +48,13 @@ app.post('/api/posts', (req, res, next) => {
     content: req.body.content
   });
 
-  post.save();
-
-  res.status(201).json({
-    message: 'Success'
-  });
+  post.save()
+    .then(createdPost => {
+      res.status(201).json({
+        message: 'Post added successfully',
+        postId: createdPost.id
+      });
+    });
 });
 
 app.delete('/api/posts/:id', (req, res, next) => {
