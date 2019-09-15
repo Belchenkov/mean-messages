@@ -3,6 +3,16 @@
         <img
             class="mr-1"
             src="https://img.icons8.com/officel/40/000000/new-message.png">
-        <div>MyMessages App</div>
+        <div>
+          <a routerLink="/">MyMessages App</a>
+        </div>
     </div>
+    <span class="spacer"></span>
+    <ul>
+      <li><a
+        mat-button
+        routerLink="/create"
+        routerLinkActive="mat-accent"
+      >New Post</a></li>
+    </ul>
 </mat-toolbar>
