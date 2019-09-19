@@ -19,6 +19,7 @@ export class PostCreateComponent implements OnInit {
   post: Post;
   isLoading = false;
   form: FormGroup;
+  imagePreview;
 
   constructor(public postsService: PostsService, public route: ActivatedRoute) {}
 
@@ -66,8 +67,8 @@ export class PostCreateComponent implements OnInit {
               content: postData.content
             };
             this.form.setValue({
-              'title': this.post.title,
-              'content': this.post.content
+              title: this.post.title,
+              content: this.post.content
             });
           });
       } else {
@@ -82,6 +83,11 @@ export class PostCreateComponent implements OnInit {
     this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
 
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
 }
