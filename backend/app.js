@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 
 const postsRoutes = require('./routes/posts');
+const userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb://belchenkov:12qwasZX@ds217078.mlab.com:17078/mean_messages',
   { useNewUrlParser: true }
@@ -36,5 +37,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/posts', postsRoutes);
+app.use('/api/users', userRoutes);
 
 module.exports = app;
