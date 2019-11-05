@@ -73,6 +73,7 @@ export class PostCreateComponent implements OnInit {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
         this.isLoading = true;
+
         this.postsService.getPost(this.postId)
           .subscribe(postData => {
             this.isLoading = false;
@@ -80,7 +81,8 @@ export class PostCreateComponent implements OnInit {
               id: postData._id,
               title: postData.title,
               content: postData.content,
-              imagePath: postData.imagePath
+              imagePath: postData.imagePath,
+              creator: postData.creator
             };
             this.form.setValue({
               title: this.post.title,
