@@ -35,7 +35,9 @@ export class AuthService {
     const authData: AuthData = {email, password};
     this.http.post('http://localhost:3000/api/user/signup', authData)
       .subscribe(response => {
-
+        this.router.navigate['/'];
+      }, error => {
+        this.authStatusListener.next(false);
       });
   }
 
@@ -49,8 +51,7 @@ export class AuthService {
         if (token) {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
-          this.tokenTimer = setTimeout(() => {
-            this.logout();
+          this.tokenTimer = setTimeout(() => {a
           }, expiresInDuration * 1000);
 
           const now = new Date();
@@ -61,6 +62,8 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.router.navigate(['/']);
         }
+      }, error => {
+        this.authStatusListener.next(false);
       });
   }
 
