@@ -8,7 +8,7 @@ const app = express();
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb://belchenkov:12qwasZX@ds217078.mlab.com:17078/mean_messages',
+mongoose.connect('mongodb://belchenkov:' + process.env.MONGO_PW + '@ds217078.mlab.com:17078/mean_messages',
   { useNewUrlParser: true }
 )
   .then(() => {
